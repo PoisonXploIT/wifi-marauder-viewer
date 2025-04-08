@@ -43,3 +43,60 @@ Verás la interfaz web con una tabla que se actualiza cada 5 segundos mostrando:
 
 Canal (Ch) RSSI BSSID ESSID
 
+--------------------------CODIGO PYTHON------------------------------------
+
+from flask import Flask, render_template_string
+import re
+
+# RUTA al archivo de log generado por PuTTY
+LOG_FILE = r"E:\LOGS WIFI\wifi_scan_marauder.log"
+
+app = Flask(__name__)
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WiFi Scan Log</title>
+    <meta http-equiv="refresh" content="5">
+    <style>
+        body { font-family: monospace; background: #111; color: #0f0; padding: 1em; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #0f0; padding: 4px; text-align: left; }
+        th { background-color: #0f0; color: #111; }
+    </style>
+</head>
+<body>
+    <h1>📡 Escaneo WiFi (M5StickC + Marauder)</h1>
+    <table>
+        <tr><th>Canal</th><th>RSSI</th><th>BSSID</th><th>ESSID</th></tr>
+        {% for ch, rssi, bssid, essid in data %}
+        <tr><td>{{ ch }}</td><td>{{ rssi }}</td><td>{{ bssid }}</td><td>{{ essid }}</td></tr>
+        {% endfor %}
+    </table>
+    <p>Actualiza cada 5 segundos.</p>
+</body>
+</html>
+"""
+
+@app.route("/")
+def index():
+    data = []
+    try:
+        with open(LOG_FILE, encoding="utf-8") as f:
+            for line in f:
+                # Regex que busca las partes del log correctamente
+                match = re.search(
+                    r"RSSI:\s*(-?\d+)\s+Ch:\s*(\d+)\s+BSSID:\s*([0-9a-f:]+)\s+.*ESSID:\s*(.+)", 
+                    line.strip(), 
+                    re.IGNORECASE
+                )
+                if match:
+                    rssi, ch, bssid, essid = match.groups()
+                    data.append((ch, rssi, bssid, essid))
+    except FileNotFoundError:
+        data.append(("?", "?", "Archivo no encontrado", "?"))
+    return render_template_string(TEMPLATE, data=data)
+
+if __name__ == "__main__":
+    app.run(debug=False)
