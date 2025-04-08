@@ -9,6 +9,13 @@ Los datos se recogen mediante **conexión serial** (PuTTY), se guardan en un arc
 No escanees ni analices redes ajenas sin autorización expresa" 
 
 
+## Vista previa del proyecto
+
+
+
+![m5stickc_wifi_web_demo](https://github.com/user-attachments/assets/0f6b791c-3dc5-491f-840a-2ae092781cf0)
+
+
 ## Requisitos
 
 - M5StickC flasheado con [WiFi Marauder](https://github.com/justcallmekoko/ESP32Marauder)
