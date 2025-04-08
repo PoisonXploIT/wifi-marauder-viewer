@@ -3,7 +3,11 @@
 Este proyecto permite visualizar en tiempo real, desde una interfaz web, los resultados del escaneo WiFi realizado por un dispositivo **M5StickC** con el firmware **WiFi Marauder**.  
 Los datos se recogen mediante **conexión serial** (PuTTY), se guardan en un archivo `.log`, y se muestran a través de un **servidor web en Flask**.
 
----
+## DISCLAIMER
+
+"Este proyecto es de uso educativo. El M5StickC con Marauder es una herramienta de pentesting, y su uso debe ser ético y legal.
+No escanees ni analices redes ajenas sin autorización expresa" 
+
 
 ## Requisitos
 
@@ -43,3 +47,9 @@ Verás la interfaz web con una tabla que se actualiza cada 5 segundos mostrando:
 
 Canal (Ch) RSSI BSSID ESSID
 
+## Licencia
+
+Este proyecto está bajo la licencia MIT.  
+Puedes usarlo, modificarlo y compartirlo libremente siempre que mantengas la autoría original.
+
+[MIT License](https://opensource.org/licenses/MIT)
