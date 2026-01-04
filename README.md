@@ -48,6 +48,7 @@ Configuración y uso
 4. Luego abre PowerShell o CMD en la carpeta del proyecto y ejecuta:
 
 a) python wifi_web.py
+
 b) Abre tu navegador en http://127.0.0.1:5000
 
 Verás la interfaz web con una tabla que se actualiza cada 5 segundos mostrando:
